@@ -15,7 +15,7 @@ def send_email(new_devices):
 
     body = "New devices connected to the network:\n\n"
     for device in new_devices:
-        body += f"IP: {device['ip']}, MAC: {device['mac']}\n"
+        body += f"IP: {device['ip']}, MAC: {device['mac']}, Hostname: {device['hostname']}\n"
 
 
     msg.attach(MIMEText(body,'plain'))
@@ -32,7 +32,7 @@ def send_email(new_devices):
         print(f"Error sending email: {e}") 
 
 def send_notification(new_devices):
-    devices_str = '\n'.join([f"IP: {device['ip']}, MAC: {device['mac']}" for device in new_devices])
+    devices_str = '\n'.join([f"IP: {device['ip']}, MAC: {device['mac']},Hostname: {device['hostname']}" for device in new_devices])
     notification.notify (
         title="New Devices Connected",
         message=f"New Devices:\n{devices_str}",

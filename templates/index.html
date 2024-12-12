@@ -19,6 +19,7 @@
                 <tr>
                     <th>IP Address</th>
                     <th>MAC Address</th>
+                    <th>Hostname</th>
                 </tr>
             </thead>
             <tbody id="devices"></tbody>
@@ -55,7 +56,11 @@
 
                 // Loop through the devices array and populate the table
                 devices && devices.map(device => {
-                    const row = `<tr><td>${device.ip}</td><td>${device.mac}</td></tr>`;
+                    const row = `<tr>
+                        <td>${device.ip}</td>
+                        <td>${device.mac}</td>
+                        <td>${device.hostname}</td>
+                        </tr>`;
                     devicesTable.innerHTML += row;  // Append the row to the table
                 });
 
