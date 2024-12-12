@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Scanner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Network Scanner</h1>
+    <div id="scanner">
+        <input type="text" id="ip_range" placeholder="Enter IP Range (e.g., 192.168.1.1/24)">
+        <button onclick="scanDevices()">Scan</button>
+    </div>
+    <div id="results">
+        <h2>Connected Devices</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>MAC Address</th>
+                </tr>
+            </thead>
+            <tbody id="devices"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function scanDevices() {
+            const ipRange = document.getElementById('ip_range').value;
+            if (!ipRange) {
+                alert("Please enter a valid IP range!");
+                return;
+            }
+             // Replace with your actual data
+             try {
+            // Send the request to the backend
+            const response = await fetch('/get-ip/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Specify the content type
+                },
+                body: JSON.stringify({ "ip": ipRange }), // Send data in JSON format
+            });
+
+            // Check if the response was successful
+            
+                const data = await response.json();  // Parse the response JSON
+                const devices = data.data; // Extract the "data" array from the response
+                console.log(devices);
+   
+                // Update the table with the devices' information
+                const devicesTable = document.getElementById('devices');
+                devicesTable.innerHTML = ''; // Clear the existing table content
+
+                // Loop through the devices array and populate the table
+                devices && devices.map(device => {
+                    const row = `<tr><td>${device.ip}</td><td>${device.mac}</td></tr>`;
+                    devicesTable.innerHTML += row;  // Append the row to the table
+                });
+
+             
+        } 
+        catch (error) {
+            // Handle any errors during the fetch operation
+            alert("Error")
+            console.error("Error fetching data: ", error);
+            alert("An error occurred while fetching device data.");
+        }
+    
+          
+            
+
+            
+        }
+    </script>
+</body>
+</html>
