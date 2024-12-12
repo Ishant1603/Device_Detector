@@ -2,7 +2,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 from plyer import notification
-
+#Mail Sendigfunction
 def send_email(new_devices):
     sender_email = "sender_email"
     receiver_email = "recipient_email"
