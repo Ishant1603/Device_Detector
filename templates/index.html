@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Scanner</title>
+    <title>Device Scanner</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -33,24 +33,21 @@
                 alert("Please enter a valid IP range!");
                 return;
             }
-             // Replace with your actual data
+            
              try {
-            // Send the request to the backend
             const response = await fetch('/get-ip/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // Specify the content type
+                    'Content-Type': 'application/json', 
                 },
-                body: JSON.stringify({ "ip": ipRange }), // Send data in JSON format
+                body: JSON.stringify({ "ip": ipRange }), 
             });
-
-            // Check if the response was successful
             
                 const data = await response.json();  // Parse the response JSON
                 const devices = data.data; // Extract the "data" array from the response
                 console.log(devices);
    
-                // Update the table with the devices' information
+    
                 const devicesTable = document.getElementById('devices');
                 devicesTable.innerHTML = ''; // Clear the existing table content
 
